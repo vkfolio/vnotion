@@ -1,0 +1,96 @@
+# VNotions AI Engine Configuration
+
+# Server settings
+server:
+  host: "127.0.0.1"
+  port: 8000
+  debug: false
+  cors_origins: ["*"]
+
+# Model providers
+providers:
+  ollama:
+    enabled: true
+    base_url: "http://localhost:11434"
+    timeout: 300
+    default_models:
+      - "llama2"
+      - "mistral"
+  
+  openai:
+    enabled: false  # Requires API key
+    timeout: 60
+    default_models:
+      - "gpt-3.5-turbo"
+      - "gpt-4"
+  
+  anthropic:
+    enabled: false  # Requires API key
+    timeout: 60
+    default_models:
+      - "claude-3-haiku"
+      - "claude-3-sonnet"
+
+# Default models for different tasks
+defaults:
+  text_generation: "llama2"
+  code_generation: "codellama"
+  chat: "neural-chat"
+  embedding: "all-MiniLM-L6-v2"
+  analysis: "mistral"
+
+# Performance settings
+performance:
+  max_concurrent_requests: 10
+  request_timeout: 300
+  model_cache_size: 3
+  embedding_batch_size: 32
+
+# Storage
+storage:
+  models_dir: "./models"
+  cache_dir: "./cache"
+  temp_dir: "./temp"
+
+# Logging
+logging:
+  level: "INFO"
+  file: null
+  format: "json"
+  
+# LangGraph settings
+langgraph:
+  max_iterations: 10
+  recursion_limit: 20
+  checkpoint_dir: "./checkpoints"
+
+# Security
+security:
+  api_key_required: false
+  rate_limit_requests_per_minute: 60
+  max_content_length: 1048576  # 1MB
+
+# Model installation
+installation:
+  auto_install_popular: false
+  verify_checksums: true
+  cleanup_after_install: true
+  
+# Popular models to auto-install (if enabled)
+popular_models:
+  ollama:
+    - name: "llama2"
+      auto_install: true
+    - name: "mistral" 
+      auto_install: true
+    - name: "codellama"
+      auto_install: false
+      
+# Features
+features:
+  embeddings: true
+  code_generation: true
+  database_queries: true
+  content_analysis: true
+  model_switching: true
+  fallback_models: true

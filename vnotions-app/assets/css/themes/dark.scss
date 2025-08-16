@@ -1,0 +1,136 @@
+// Dark theme variables for VNotions
+// Based on Notion's dark mode color palette
+
+:root.dark-mode {
+  // Surface colors (backgrounds)
+  --surface-0: #1f1f1f;     // Darkest background
+  --surface-50: #252525;    // Very dark
+  --surface-100: #2f2f2f;   // Dark
+  --surface-200: #373737;   // Medium dark
+  --surface-300: #3f3f3f;   // Medium
+  --surface-400: #474747;   // Medium light
+  --surface-500: #525252;   // Light medium
+  --surface-600: #5a5a5a;   // Light
+  --surface-700: #626262;   // Lighter
+  --surface-800: #6a6a6a;   // Very light
+  --surface-900: #7a7a7a;   // Lightest
+
+  // Text colors
+  --text-primary: #ffffff;        // Primary text
+  --text-secondary: #9b9a97;      // Secondary text
+  --text-muted: #6f6e69;          // Muted text
+  --text-disabled: #454441;       // Disabled text
+
+  // Border colors
+  --border-color: #373737;        // Default border
+  --border-light: #2f2f2f;        // Light border
+  --border-strong: #474747;       // Strong border
+
+  // Accent colors
+  --accent-primary: #2383e2;      // Primary accent (blue)
+  --accent-secondary: #1a6cc7;    // Secondary accent
+  --accent-hover: #3d95e8;        // Hover state
+
+  // Component-specific colors
+  --sidebar-bg: #252525;          // Sidebar background
+  --sidebar-hover: #2f2f2f;       // Sidebar item hover
+  --sidebar-active: #373737;      // Sidebar item active
+
+  --content-bg: #1f1f1f;          // Main content background
+
+  // Semantic colors
+  --success: #4ade80;             // Success green
+  --warning: #facc15;             // Warning yellow
+  --error: #ef4444;               // Error red
+  --info: #3b82f6;                // Info blue
+
+  // Shadow colors
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+
+  // Transitions
+  --transition-fast: 0.15s ease-out;
+  --transition-normal: 0.2s ease-out;
+  --transition-slow: 0.3s ease-out;
+
+  // Z-index layers
+  --z-dropdown: 1000;
+  --z-modal: 2000;
+  --z-tooltip: 3000;
+  --z-top: 9999;
+
+  // Typography
+  --font-size-xs: 0.75rem;        // 12px
+  --font-size-sm: 0.875rem;       // 14px
+  --font-size-base: 1rem;         // 16px
+  --font-size-lg: 1.125rem;       // 18px
+  --font-size-xl: 1.25rem;        // 20px
+  --font-size-2xl: 1.5rem;        // 24px
+  --font-size-3xl: 1.875rem;      // 30px
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  // Spacing
+  --spacing-xs: 0.25rem;          // 4px
+  --spacing-sm: 0.5rem;           // 8px
+  --spacing-md: 1rem;             // 16px
+  --spacing-lg: 1.5rem;           // 24px
+  --spacing-xl: 2rem;             // 32px
+  --spacing-2xl: 3rem;            // 48px
+
+  // Border radius
+  --radius-sm: 0.25rem;           // 4px
+  --radius-md: 0.375rem;          // 6px
+  --radius-lg: 0.5rem;            // 8px
+  --radius-xl: 0.75rem;           // 12px
+
+  // Component dimensions
+  --sidebar-width: 250px;
+  --properties-width: 300px;
+  --topbar-height: 48px;
+}
+
+// Light theme fallback (will be implemented later if needed)
+:root {
+  // Default to dark theme for now
+  --surface-0: #1f1f1f;
+  --surface-50: #252525;
+  --surface-100: #2f2f2f;
+  --surface-200: #373737;
+  --surface-300: #3f3f3f;
+  --surface-400: #474747;
+  --surface-500: #525252;
+  --surface-600: #5a5a5a;
+  --surface-700: #626262;
+  --surface-800: #6a6a6a;
+  --surface-900: #7a7a7a;
+
+  --text-primary: #ffffff;
+  --text-secondary: #9b9a97;
+  --text-muted: #6f6e69;
+  --text-disabled: #454441;
+
+  --border-color: #373737;
+  --border-light: #2f2f2f;
+  --border-strong: #474747;
+
+  --accent-primary: #2383e2;
+  --accent-secondary: #1a6cc7;
+  --accent-hover: #3d95e8;
+
+  --sidebar-bg: #252525;
+  --sidebar-hover: #2f2f2f;
+  --sidebar-active: #373737;
+
+  --content-bg: #1f1f1f;
+
+  --success: #4ade80;
+  --warning: #facc15;
+  --error: #ef4444;
+  --info: #3b82f6;
+}
