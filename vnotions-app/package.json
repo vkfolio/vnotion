@@ -21,8 +21,16 @@
     "postinstall": "nuxt prepare",
     "test": "vitest",
     "test:e2e": "playwright test",
+    "test:coverage": "vitest --coverage",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "ai:setup": "cd ../ai-engine && python installer.py setup",
+    "ai:start": "cd ../ai-engine && python start.py",
+    "ai:dev": "concurrently \"npm run ai:start\" \"npm run dev:full\"",
+    "workspace:init": "node scripts/init-workspace.js",
+    "clean": "rm -rf .nuxt .output dist-electron node_modules/.cache",
+    "typecheck": "echo 'TypeScript disabled - using JavaScript only'"
   },
   "dependencies": {
     "@nuxt/devtools": "^1.3.9",
