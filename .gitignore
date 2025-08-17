@@ -113,3 +113,4 @@ build/
 *.whl
 Screenshot*
 CLAUDE.md
+IMPLEMENTATION_COMPLETE.md
