@@ -1,0 +1,1 @@
+<template><div class="filecelldisplay w-full"><span class="text-sm text-gray-400 italic">{{ value || 'Empty' }}</span></div></template><script>export default { name: 'FileCellDisplay', props: { value: {}, column: Object, isPrimary: Boolean }, emits: ['value-changed', 'edit-end'] }</script>

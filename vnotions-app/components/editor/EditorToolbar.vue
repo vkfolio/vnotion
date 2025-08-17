@@ -180,18 +180,12 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import type { Editor } from '@tiptap/vue-3'
+<script setup>
 import ToolbarButton from './ToolbarButton.vue'
 import ToolbarDropdown from './ToolbarDropdown.vue'
 import ToolbarColorPicker from './ToolbarColorPicker.vue'
 
-export interface EditorToolbarProps {
-  editor: Editor | null
-  isSticky?: boolean
-}
-
-const props = withDefaults(defineProps<EditorToolbarProps>(), {
+const props = withDefaults(defineProps(), {
   isSticky: false
 })
 
@@ -238,7 +232,7 @@ const getCurrentHeading = () => {
   return 'paragraph'
 }
 
-const setHeading = (value: string) => {
+const setHeading = (value) => {
   const option = headingOptions.find(opt => opt.value === value)
   option?.command()
 }
@@ -257,7 +251,7 @@ const toggleTaskList = () => {
 }
 
 // Text alignment commands
-const setTextAlign = (alignment: string) => {
+const setTextAlign = (alignment) => {
   props.editor?.chain().focus().setTextAlign(alignment).run()
 }
 
@@ -280,7 +274,7 @@ const getCurrentTextColor = () => {
   return props.editor.getAttributes('textStyle').color || '#ffffff'
 }
 
-const setTextColor = (color: string) => {
+const setTextColor = (color) => {
   props.editor?.chain().focus().setColor(color).run()
 }
 
@@ -299,7 +293,7 @@ const redo = () => {
 
 // Keyboard shortcuts
 onMounted(() => {
-  const handleKeydown = (e: KeyboardEvent) => {
+  const handleKeydown = (e) => {
     if (!props.editor) return
     
     const isCtrl = e.ctrlKey || e.metaKey

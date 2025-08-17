@@ -1,0 +1,1 @@
+<template><div class="checkboxcelldisplay w-full"><span class="text-sm text-gray-400 italic">{{ value || 'Empty' }}</span></div></template><script>export default { name: 'CheckboxCellDisplay', props: { value: {}, column: Object, isPrimary: Boolean }, emits: ['value-changed', 'edit-end'] }</script>

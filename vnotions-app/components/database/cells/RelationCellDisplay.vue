@@ -1,0 +1,1 @@
+<template><div class="relationcelldisplay w-full"><span class="text-sm text-gray-400 italic">{{ value || 'Empty' }}</span></div></template><script>export default { name: 'RelationCellDisplay', props: { value: {}, column: Object, isPrimary: Boolean }, emits: ['value-changed', 'edit-end'] }</script>

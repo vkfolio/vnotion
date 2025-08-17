@@ -62,11 +62,5 @@ export default defineNuxtConfig({
         { hid: 'description', name: 'description', content: 'Local-first, privacy-focused knowledge management application' }
       ]
     }
-  },
-  
-  // TypeScript configuration
-  typescript: {
-    strict: true,
-    typeCheck: true
   }
 })

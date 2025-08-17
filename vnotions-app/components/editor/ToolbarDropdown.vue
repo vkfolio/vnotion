@@ -26,25 +26,15 @@
   </div>
 </template>
 
-<script setup lang="ts">
-export interface DropdownOption {
-  label: string
-  value: string
-  command?: () => void
-}
+<script setup>
 
-export interface ToolbarDropdownProps {
-  options: DropdownOption[]
-  currentValue?: string
-  placeholder?: string
-}
 
-const props = withDefaults(defineProps<ToolbarDropdownProps>(), {
+const props = withDefaults(defineProps(), {
   placeholder: 'Select...'
 })
 
 const emit = defineEmits<{
-  select: [value: string]
+  select: [value]
 }>()
 
 const isOpen = ref(false)
@@ -67,7 +57,7 @@ const selectOption = (option: DropdownOption) => {
 
 // Close dropdown when clicking outside
 onMounted(() => {
-  const handleClickOutside = (event: MouseEvent) => {
+  const handleClickOutside = (event) => {
     if (dropdownRef.value && !dropdownRef.value.contains(event.target as Node)) {
       isOpen.value = false
     }

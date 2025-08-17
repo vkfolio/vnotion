@@ -144,32 +144,15 @@
   </div>
 </template>
 
-<script setup lang="ts">
-interface Page {
-  id: string
-  title: string
-  type: 'page' | 'database'
-  icon?: string
-  children?: Page[]
-  isFavorite?: boolean
-  createdAt: Date
-  updatedAt: Date
-}
-
-interface Database {
-  id: string
-  title: string
-  type: 'database'
-  properties: any[]
-  createdAt: Date
-  updatedAt: Date
-}
+<script setup>
+// Page: { id, title, type, icon?, children?, isFavorite?, createdAt, updatedAt }
+// Database: { id, title, type, properties, createdAt, updatedAt }
 
 // Reactive state
 const showUserMenu = ref(false)
 const showSearch = ref(false)
 const currentPageId = ref('home')
-const expandedPages = ref<Set<string>>(new Set())
+const expandedPages = ref(new Set())
 
 // Mock data (will be replaced with real data from stores)
 const userWorkspace = ref({
@@ -177,7 +160,7 @@ const userWorkspace = ref({
   email: 'user@example.com'
 })
 
-const favoritePages = ref<Page[]>([
+const favoritePages = ref([
   {
     id: 'quick-notes',
     title: 'Quick Notes',
@@ -194,7 +177,7 @@ const favoritePages = ref<Page[]>([
   }
 ])
 
-const rootPages = ref<Page[]>([
+const rootPages = ref([
   {
     id: 'home',
     title: 'Home',
@@ -229,7 +212,7 @@ const rootPages = ref<Page[]>([
   }
 ])
 
-const databases = ref<Database[]>([
+const databases = ref([
   {
     id: 'tasks-db',
     title: 'Tasks',
@@ -251,18 +234,18 @@ const databases = ref<Database[]>([
 const trashCount = ref(3)
 
 // Methods
-const getPageIcon = (type: string, icon?: string) => {
+const getPageIcon = (type, icon) => {
   if (icon) return icon
   return type === 'database' ? 'pi pi-table nav-icon' : 'pi pi-file nav-icon'
 }
 
-const navigateToPage = (pageId: string) => {
+const navigateToPage = (pageId) => {
   currentPageId.value = pageId
   // TODO: Implement actual navigation
   console.log('Navigate to page:', pageId)
 }
 
-const togglePageExpand = (pageId: string) => {
+const togglePageExpand = (pageId) => {
   if (expandedPages.value.has(pageId)) {
     expandedPages.value.delete(pageId)
   } else {
@@ -275,7 +258,7 @@ const createNewPage = () => {
   console.log('Create new page')
 }
 
-const createChildPage = (parentId: string) => {
+const createChildPage = (parentId) => {
   // TODO: Implement child page creation
   console.log('Create child page for:', parentId)
 }
@@ -297,7 +280,7 @@ const openSettings = () => {
 }
 
 // Keyboard shortcuts
-const handleKeydown = (event: KeyboardEvent) => {
+const handleKeydown = (event) => {
   if ((event.ctrlKey || event.metaKey)) {
     switch (event.key) {
       case 'n':

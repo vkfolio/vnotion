@@ -259,34 +259,10 @@
   </div>
 </template>
 
-<script setup lang="ts">
-interface CustomProperty {
-  id: string
-  name: string
-  type: 'text' | 'number' | 'select' | 'date' | 'checkbox'
-  placeholder?: string
-  options?: string[]
-}
-
-interface PageProperties {
-  title: string
-  description: string
-  tags: string[]
-  status: string
-  priority: string
-  isFavorite: boolean
-  createdAt: Date
-  updatedAt: Date
-  dueDate: string
-  customValues: Record<string, any>
-}
-
-interface PageStats {
-  wordCount: number
-  charCount: number
-  readingTime: number
-  lastViewed: Date
-}
+<script setup>
+// CustomProperty: { id, name, type, placeholder?, options? }
+// PageProperties: { title, description, tags, status, priority, isFavorite, createdAt, updatedAt, dueDate, customValues }
+// PageStats: { wordCount, charCount, readingTime, lastViewed }
 
 defineEmits<{
   close: []
@@ -344,7 +320,7 @@ const pageStats = ref<PageStats>({
 })
 
 // Methods
-const formatDate = (date: Date) => {
+const formatDate = (date) => {
   return new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'short',
@@ -354,13 +330,13 @@ const formatDate = (date: Date) => {
   }).format(date)
 }
 
-const updateProperty = (key: keyof PageProperties, value: any) => {
-  (pageProperties.value as any)[key] = value
+const updateProperty = (key, value) => {
+  (pageProperties.value)[key] = value
   // TODO: Debounce and save to backend
   console.log('Update property:', key, value)
 }
 
-const updateCustomProperty = (propertyId: string, value: any) => {
+const updateCustomProperty = (propertyId, value) => {
   pageProperties.value.customValues[propertyId] = value
   // TODO: Debounce and save to backend
   console.log('Update custom property:', propertyId, value)
@@ -375,7 +351,7 @@ const addTag = () => {
   }
 }
 
-const removeTag = (tag: string) => {
+const removeTag = (tag) => {
   const index = pageProperties.value.tags.indexOf(tag)
   if (index > -1) {
     pageProperties.value.tags.splice(index, 1)

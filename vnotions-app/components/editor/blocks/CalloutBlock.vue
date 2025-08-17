@@ -76,19 +76,11 @@
   </div>
 </template>
 
-<script setup lang="ts">
-export type CalloutType = 'info' | 'warning' | 'error' | 'success' | 'note' | 'tip'
+<script setup>
 
-export interface CalloutBlockProps {
-  type?: CalloutType
-  icon?: string
-  content?: string
-  isFocused?: boolean
-  onUpdate?: (data: { type: CalloutType; icon: string; content: string }) => void
-  onDelete?: () => void
-}
 
-const props = withDefaults(defineProps<CalloutBlockProps>(), {
+
+const props = withDefaults(defineProps(), {
   type: 'info',
   icon: 'pi-info-circle',
   content: '',
@@ -96,7 +88,7 @@ const props = withDefaults(defineProps<CalloutBlockProps>(), {
 })
 
 const emit = defineEmits<{
-  update: [data: { type: CalloutType; icon: string; content: string }]
+  update: [data: { type: CalloutType; icon; content }]
   delete: []
   focus: []
   blur: []
@@ -159,7 +151,7 @@ const placeholder = computed(() => {
 })
 
 // Event handlers
-const updateContent = (event: Event) => {
+const updateContent = (event) => {
   const target = event.target as HTMLElement
   const content = target.textContent || ''
   
@@ -185,7 +177,7 @@ const toggleIconPicker = () => {
   showIconPicker.value = !showIconPicker.value
 }
 
-const selectIcon = (iconOption: { icon: string; label: string }) => {
+const selectIcon = (iconOption: { icon; label }) => {
   currentIcon.value = iconOption.icon
   showIconPicker.value = false
   emitUpdate()
@@ -204,7 +196,7 @@ const handleBlur = () => {
   emit('blur')
 }
 
-const emitUpdate = (content?: string) => {
+const emitUpdate = (content?) => {
   const data = {
     type: selectedType.value,
     icon: currentIcon.value,
@@ -239,7 +231,7 @@ watch(() => props.icon, (newIcon) => {
 
 // Close icon picker when clicking outside
 onMounted(() => {
-  const handleClickOutside = (event: MouseEvent) => {
+  const handleClickOutside = (event) => {
     if (iconPickerRef.value && !iconPickerRef.value.contains(event.target as Node)) {
       showIconPicker.value = false
     }

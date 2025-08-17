@@ -41,39 +41,21 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import type { Editor } from '@tiptap/vue-3'
+<script setup>
+// SlashCommand: { name, title, description, icon, shortcut, keywords, action }
+// SlashCommandsProps: { editor, position, searchQuery? }
 
-export interface SlashCommand {
-  name: string
-  title: string
-  description: string
-  icon: string
-  shortcut: string
-  keywords: string[]
-  action: () => void
-}
-
-export interface SlashCommandsProps {
-  editor: Editor | null
-  position: { x: number; y: number }
-  searchQuery?: string
-}
-
-const props = withDefaults(defineProps<SlashCommandsProps>(), {
+const props = withDefaults(defineProps(), {
   searchQuery: ''
 })
 
-const emit = defineEmits<{
-  close: []
-  select: [command: string]
-}>()
+const emit = defineEmits(['close', 'select'])
 
-const menuRef = ref<HTMLElement>()
+const menuRef = ref()
 const selectedIndex = ref(0)
 
 // Available slash commands
-const commands = computed<SlashCommand[]>(() => [
+const commands = computed(() => [
   {
     name: 'h1',
     title: 'Heading 1',
@@ -191,7 +173,7 @@ const filteredCommands = computed(() => {
 })
 
 // Handle keyboard navigation
-const handleKeydown = (e: KeyboardEvent) => {
+const handleKeydown = (e) => {
   switch (e.key) {
     case 'ArrowDown':
       e.preventDefault()

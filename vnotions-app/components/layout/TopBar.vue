@@ -177,35 +177,23 @@
   </div>
 </template>
 
-<script setup lang="ts">
-interface Breadcrumb {
-  id: string
-  title: string
-  icon?: string
-}
-
-interface Page {
-  id: string
-  title: string
-  type: 'page' | 'database'
-  icon?: string
-  isFavorite?: boolean
-  parentId?: string
-}
+<script setup>
+// Breadcrumb: { id, title, icon? }
+// Page: { id, title, type, icon?, isFavorite?, parentId? }
 
 // Inject layout state
-const layoutState = inject('layoutState') as any
+const layoutState = inject('layoutState')
 
 // Reactive state
 const showMoreMenu = ref(false)
 const showIconPicker = ref(false)
 const isEditingTitle = ref(false)
 const editedTitle = ref('')
-const titleInput = ref<HTMLInputElement>()
+const titleInput = ref()
 const moreMenuPosition = ref({ top: '0px', right: '1rem' })
 
 // Mock current page data (will be replaced with real data from stores)
-const currentPage = ref<Page>({
+const currentPage = ref({
   id: 'home',
   title: 'Home',
   type: 'page',
@@ -214,7 +202,7 @@ const currentPage = ref<Page>({
 })
 
 // Mock breadcrumbs (will be computed from navigation state)
-const breadcrumbs = ref<Breadcrumb[]>([
+const breadcrumbs = ref([
   { id: 'workspace', title: 'My Workspace', icon: 'pi pi-home' },
   { id: 'home', title: 'Home' }
 ])
@@ -235,7 +223,7 @@ const availableIcons = [
 const showPropertiesPanel = computed(() => layoutState?.showPropertiesPanel?.value ?? true)
 
 // Methods
-const navigateToPage = (pageId: string) => {
+const navigateToPage = (pageId) => {
   // TODO: Implement navigation
   console.log('Navigate to page:', pageId)
 }
@@ -276,7 +264,7 @@ const shareePage = () => {
   console.log('Share page')
 }
 
-const changePageIcon = (icon: string) => {
+const changePageIcon = (icon) => {
   currentPage.value.icon = icon
   showIconPicker.value = false
   // TODO: Save to backend
@@ -289,7 +277,7 @@ onClickOutside(templateRef, () => {
 })
 
 // Keyboard shortcuts
-const handleKeydown = (event: KeyboardEvent) => {
+const handleKeydown = (event) => {
   if (event.key === 'F2' && !isEditingTitle.value) {
     event.preventDefault()
     startEditTitle()

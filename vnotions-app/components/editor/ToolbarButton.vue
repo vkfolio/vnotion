@@ -14,15 +14,9 @@
   </button>
 </template>
 
-<script setup lang="ts">
-export interface ToolbarButtonProps {
-  isActive?: boolean
-  disabled?: boolean
-  title?: string
-  icon?: string
-}
+<script setup>
 
-defineProps<ToolbarButtonProps>()
+defineProps()
 defineEmits<{
   click: []
 }>()

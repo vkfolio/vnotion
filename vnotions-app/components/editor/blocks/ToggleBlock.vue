@@ -60,19 +60,9 @@
   </div>
 </template>
 
-<script setup lang="ts">
-export interface ToggleBlockProps {
-  title?: string
-  content?: string
-  isExpanded?: boolean
-  isFocused?: boolean
-  titlePlaceholder?: string
-  contentPlaceholder?: string
-  onUpdate?: (data: { title: string; content: string; isExpanded: boolean }) => void
-  onDelete?: () => void
-}
+<script setup>
 
-const props = withDefaults(defineProps<ToggleBlockProps>(), {
+const props = withDefaults(defineProps(), {
   title: '',
   content: '',
   isExpanded: false,
@@ -82,7 +72,7 @@ const props = withDefaults(defineProps<ToggleBlockProps>(), {
 })
 
 const emit = defineEmits<{
-  update: [data: { title: string; content: string; isExpanded: boolean }]
+  update: [data: { title; content; isExpanded }]
   delete: []
   focus: []
   blur: []
@@ -98,13 +88,13 @@ const toggleExpanded = () => {
   emitUpdate()
 }
 
-const updateTitle = (event: Event) => {
+const updateTitle = (event) => {
   const target = event.target as HTMLElement
   const title = target.textContent || ''
   emitUpdate(title)
 }
 
-const updateContent = (event: Event) => {
+const updateContent = (event) => {
   const target = event.target as HTMLElement
   const content = target.textContent || ''
   emitUpdate(undefined, content)
@@ -131,7 +121,7 @@ const deleteBlock = () => {
   props.onDelete?.()
 }
 
-const emitUpdate = (title?: string, content?: string) => {
+const emitUpdate = (title?, content?) => {
   const data = {
     title: title ?? titleRef.value?.textContent || '',
     content: content ?? contentRef.value?.textContent || '',
@@ -171,7 +161,7 @@ watch(() => props.isExpanded, (newExpanded) => {
 })
 
 // Keyboard shortcuts
-const handleKeydown = (event: KeyboardEvent) => {
+const handleKeydown = (event) => {
   // Enter key to expand/collapse when focused on title
   if (event.key === 'Enter' && document.activeElement === titleRef.value) {
     event.preventDefault()

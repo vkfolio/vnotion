@@ -28,19 +28,15 @@
   </div>
 </template>
 
-<script setup lang="ts">
-export interface ToolbarColorPickerProps {
-  currentColor?: string
-  title?: string
-}
+<script setup>
 
-const props = withDefaults(defineProps<ToolbarColorPickerProps>(), {
+const props = withDefaults(defineProps(), {
   currentColor: '#ffffff',
   title: 'Text Color'
 })
 
 const emit = defineEmits<{
-  select: [color: string]
+  select: [color]
 }>()
 
 const isOpen = ref(false)
@@ -73,14 +69,14 @@ const toggleColorMenu = () => {
   isOpen.value = !isOpen.value
 }
 
-const selectColor = (color: string) => {
+const selectColor = (color) => {
   emit('select', color)
   isOpen.value = false
 }
 
 // Close color menu when clicking outside
 onMounted(() => {
-  const handleClickOutside = (event: MouseEvent) => {
+  const handleClickOutside = (event) => {
     if (colorPickerRef.value && !colorPickerRef.value.contains(event.target as Node)) {
       isOpen.value = false
     }

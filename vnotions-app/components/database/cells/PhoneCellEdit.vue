@@ -1,0 +1,1 @@
+<template><div class="phonecelledit w-full"><span class="text-sm text-gray-400 italic">{{ value || 'Empty' }}</span></div></template><script>export default { name: 'PhoneCellEdit', props: { value: {}, column: Object, isPrimary: Boolean }, emits: ['value-changed', 'edit-end'] }</script>

@@ -37,7 +37,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { Editor, EditorContent, Extension } from '@tiptap/vue-3'
 import { StarterKit } from '@tiptap/starter-kit'
 import { Placeholder } from '@tiptap/extension-placeholder'
@@ -57,22 +57,7 @@ import { Gapcursor } from '@tiptap/extension-gapcursor'
 import EditorToolbar from './EditorToolbar.vue'
 import SlashCommands from './SlashCommands.vue'
 
-export interface EditorProps {
-  modelValue?: string
-  placeholder?: string
-  showToolbar?: boolean
-  stickyToolbar?: boolean
-  showCharacterCount?: boolean
-  autoSave?: boolean
-  autoSaveDelay?: number
-  editable?: boolean
-  onUpdate?: (content: string) => void
-  onFocus?: () => void
-  onBlur?: () => void
-  onReady?: (editor: Editor) => void
-}
-
-const props = withDefaults(defineProps<EditorProps>(), {
+const props = withDefaults(defineProps(), {
   modelValue: '',
   placeholder: 'Start writing...',
   showToolbar: true,
@@ -83,23 +68,18 @@ const props = withDefaults(defineProps<EditorProps>(), {
   editable: true
 })
 
-const emit = defineEmits<{
-  'update:modelValue': [value: string]
-  focus: []
-  blur: []
-  ready: [editor: Editor]
-}>()
+const emit = defineEmits(['update:modelValue', 'focus', 'blur', 'ready'])
 
 // Reactive state
 const isFocused = ref(false)
 const showSlashMenu = ref(false)
 const slashMenuPosition = ref({ x: 0, y: 0 })
-const editorContainer = ref<HTMLElement>()
+const editorContainer = ref()
 
 // Auto-save functionality
-let autoSaveTimeout: NodeJS.Timeout | null = null
+let autoSaveTimeout = null
 
-const debouncedSave = (content: string) => {
+const debouncedSave = (content) => {
   if (autoSaveTimeout) {
     clearTimeout(autoSaveTimeout)
   }
@@ -268,7 +248,7 @@ const hideSlashMenu = () => {
   showSlashMenu.value = false
 }
 
-const handleSlashCommand = (command: string) => {
+const handleSlashCommand = (command) => {
   if (!editor) return
   
   // Remove the '/' character and execute command
@@ -291,7 +271,7 @@ const handleSlashCommand = (command: string) => {
   hideSlashMenu()
 }
 
-const executeSlashCommand = (command: string) => {
+const executeSlashCommand = (command) => {
   if (!editor) return
   
   switch (command) {

@@ -105,36 +105,16 @@
   </div>
 </template>
 
-<script setup lang="ts">
-interface Page {
-  id: string
-  title: string
-  type: 'page' | 'database'
-  icon?: string
-  children?: Page[]
-  isFavorite?: boolean
-  createdAt: Date
-  updatedAt: Date
-}
+<script setup>
+// Page: { id, title, type, icon?, children?, isFavorite?, createdAt, updatedAt }
+// Props: { page, currentPageId, expandedPages, level? }
+// Emits: { navigate, toggleExpand, createChild }
 
-interface Props {
-  page: Page
-  currentPageId: string
-  expandedPages: Set<string>
-  level?: number
-}
-
-interface Emits {
-  navigate: [pageId: string]
-  toggleExpand: [pageId: string]
-  createChild: [parentId: string]
-}
-
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps(), {
   level: 0
 })
 
-defineEmits<Emits>()
+defineEmits([])
 
 // Reactive state
 const showPageMenu = ref(false)
@@ -144,13 +124,13 @@ const menuPosition = ref({ top: '0px', left: '0px' })
 const isExpanded = computed(() => props.expandedPages.has(props.page.id))
 
 // Methods
-const getPageIcon = (type: string, icon?: string) => {
+const getPageIcon = (type, icon?) => {
   if (icon) return icon
   return type === 'database' ? 'pi pi-table nav-icon' : 'pi pi-file nav-icon'
 }
 
 // Handle menu positioning
-const updateMenuPosition = (event: MouseEvent) => {
+const updateMenuPosition = (event) => {
   const rect = (event.target as HTMLElement).getBoundingClientRect()
   menuPosition.value = {
     top: `${rect.bottom + 4}px`,

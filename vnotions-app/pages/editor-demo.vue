@@ -198,7 +198,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import Editor from '~/components/editor/Editor.vue'
 
 // Page setup

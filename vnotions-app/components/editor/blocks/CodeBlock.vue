@@ -50,23 +50,16 @@
   </div>
 </template>
 
-<script setup lang="ts">
-export interface CodeBlockProps {
-  code?: string
-  language?: string
-  isFocused?: boolean
-  onUpdate?: (content: { code: string; language: string }) => void
-  onDelete?: () => void
-}
+<script setup>
 
-const props = withDefaults(defineProps<CodeBlockProps>(), {
+const props = withDefaults(defineProps(), {
   code: '',
   language: '',
   isFocused: false
 })
 
 const emit = defineEmits<{
-  update: [content: { code: string; language: string }]
+  update: [content: { code; language }]
   delete: []
 }>()
 
